@@ -33,6 +33,8 @@ namespace API
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddCors();
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -54,6 +56,13 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(policy =>
+            {
+                policy.AllowAnyHeader();
+                policy.AllowAnyMethod();
+                policy.WithOrigins(new string[] { @"https://localhost:4200" });
+            });
 
             app.UseAuthorization();
 

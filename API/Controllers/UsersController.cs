@@ -16,15 +16,15 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<AppUser> GetUsers()
+        public async Task<IEnumerable<AppUser>> GetUsers()
         {
-            return context.Users.ToList();
+            return await context.Users.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public AppUser GetUser(int id)
+        public async Task<AppUser> GetUser(int id)
         {
-            return context.Users.Find(id);
+            return await context.Users.FindAsync(id);
         }
     }
 }
